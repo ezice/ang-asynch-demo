@@ -1,0 +1,18 @@
+<form
+  *ngIf="user | async; else loading"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
+  <label for="name">First Name</label>
+  <input id="name" formControlName="name" />
+  <div
+    *ngIf="form.controls.name.errors?.required && form.controls.name.touched"
+    class="error"
+  >
+    *Required
+  </div>
+
+  <button [disabled]="!form.valid">Save</button>
+</form>
+
+<ng-template #loading> Loading User... </ng-template>
