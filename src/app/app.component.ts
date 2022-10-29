@@ -10,7 +10,7 @@ import { UserService, User } from './user.service';
 })
 export class AppComponent {
   form: FormGroup;
-  user: Observable<User>;
+  user: User;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,12 +22,8 @@ export class AppComponent {
       name: ['', Validators.required],
     });
 
-    this.user = this.userService.loadUser().pipe(
-      tap((user) => {
-        console.log('received user');
-        this.form.patchValue(user);
-      })
-    );
+    this.user = this.userService.loadUser();
+    this.form.patchValue(this.user);
   }
 
   submit() {
