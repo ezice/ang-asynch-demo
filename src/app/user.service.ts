@@ -22,9 +22,11 @@ export class UserService {
   }
 
   async delay(ms: number) {
-    await new Promise((resolve) => setTimeout(() => resolve(123), ms)).then(
+    let promise = new Promise((resolve) => setTimeout(() => resolve(123), ms)).then(
       () => console.log('fired')
     );
+
+    let promiseValue = await promise;
   }
 
   sleep(ms: number) {
